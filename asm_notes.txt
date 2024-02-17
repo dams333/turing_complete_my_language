@@ -1,0 +1,121 @@
+opcode src1 src2 dest
+0 | ADD
+1 | SUB
+2 | AND
+3 | OR
+4 | NOT
+5 | XOR
+
+opcode RAMaddr value X
+8 | write RAM
+opcode RAMaddr X dest
+9 | read RAM
+
+opcode val X X
+16 | Stack push
+opcode X X dest
+17 | Stack pop
+
+opcode fct X X
+18 | call
+opcode X X X 
+20 | ret
+
+opcode src1 src2 adress
+32 | ==
+33 | !=
+34 | <
+35 | <=
+36 | >
+37 | >=
+
+
+opcode: XXXXXXab
+b = 1 => src1 direct value
+a = 1 => src2 direct value
+
+
+
+
+
+
+00000000         00000000   00000000 00000000
+param count      val        [   op code     ]
+
+param count: 00000000 / 00000001 / 00000010 / 00000011
+             no param   1 param    2 param    3 param
+
+val: 00000000 / 00000001 / 00000010
+     no val     in1        in2
+
+
+
+in/out:
+0 - 7 => registers
+8 => counter
+9 => in/out
+
+
+
+
+00000010         [00000000] 00000000 00000000 => mov
+p1: input (in/reg/val)
+p2: output (out/reg)
+
+00000011         [00000000] 00000001 0000XXXX => calc
+XXXX | OPER
+0000 | ADD
+0001 | SUB
+0010 | AND
+0011 | NAND
+0100 | OR
+0101 | NOR
+0110 | XOR
+0111 | shift left p1 by p2
+1000 | rotat left p1 by p2
+1001 | shift righ p1 by p2
+1010 | rotat righ p1 by p2
+
+p1: input (in/reg/val)
+p2: input (in/reg/val)
+p3: output (out/reg)
+
+
+00000001         [00000000] 00000010 00000XXX => jmp
+XXX | COND
+000 | true
+001 | r0 == r1
+010 | r0 != r1
+011 | r0 < r1
+100 | r0 <= r1
+101 | r0 > r1
+110 | r0 >= r1
+
+p1: addr (in/reg/val)
+
+
+00000010         [00000000] 00000100 0000000X => RAM
+X | ACTION
+0 | read => p2: output (out/reg)
+1 | write => p2: input (in/reg/val)
+
+p1: addr (in/reg/val)
+
+
+00000001         [00000000] 00001000 0000000X => Stack
+X | ACTION
+0 | push => p1: input (in/reg/val)
+1 | pop => p1: output (out/reg)
+
+
+00000001         [00000000] 00010000 00000000 => call
+p1: func addr (in/reg/val)
+00000000         [00000000] 00010000 00000001 => ret
+
+
+00000000         [00000000] 00100000 0000000X => actions
+X | ACTION
+0 | STOP
+1 | BELL
+
+

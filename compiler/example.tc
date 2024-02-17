@@ -1,0 +1,28 @@
+func main() {
+	var test = input()
+
+	var test2 = test + 42
+
+	if (test2 > 42)
+	{
+		out(42)
+	} else{
+		if (test2 - 2 > 42)
+		{
+			out(42)
+		} else{
+			out(test(test2))
+		}
+		out(test)
+	}
+
+	var x = 0
+	while (x < 10)
+	{
+		out(x)
+	}
+}
+
+func test(a) {
+	return a + 2
+}

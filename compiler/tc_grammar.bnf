@@ -1,10 +1,10 @@
 <IDENTIFIER> ::= ([a-z] | [A-Z] | "_") ([a-z] | [A-Z] | [0-9] | "_")*
-<NUMBER> ::= [0-9] [0-9]*
+<NUMBER> ::= [0-9]+
 
 <BINARY_OPERATOR> ::= "+" | "-" | "&" | "&&" | "|" | "||" | "==" | "!=" | "<" | ">" | "<=" | ">="
 <UNARY_OPERATOR> ::= "!"
 
-<PROGRAM> ::= <FUNCTION> <FUNCTION>
+<PROGRAM> ::= <FUNCTION>+
 
 <FUNCTION> ::= "func" <IDENTIFIER> "(" <FUNCTION_PARAMETERS>? ")" <SCOPE>
 
@@ -13,7 +13,7 @@
 
 <SCOPE> ::= "{" <STATEMENTS>* "}"
 
-<STATEMENTS> ::= <STATEMENT> <STATEMENT>*
+<STATEMENTS> ::= <STATEMENT>+
 <STATEMENT> ::= <VAR_DECLARATION> | <VAR_ASSIGNMENT> | <RETURN> | <IF> | <WHILE> | <FUNCTION_CALL>
 
 <EXPRESSIONS> ::= <EXPRESSION> ("," <EXPRESSION>)*

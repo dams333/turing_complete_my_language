@@ -5,6 +5,7 @@ SRCS		=	\
 				$(addprefix parser/, \
 					LexicalParser.cpp \
 					Token.cpp \
+					Ast.cpp \
 				)
 				
 
